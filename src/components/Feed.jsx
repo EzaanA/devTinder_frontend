@@ -4,7 +4,6 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFeed } from '../utils/feedSlice'
 import UserCard from './UserCard'
-import { createLogger } from 'vite'
 
 
 const Feed = () => {
