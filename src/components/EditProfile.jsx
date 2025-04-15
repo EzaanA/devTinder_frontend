@@ -4,6 +4,9 @@ import UserCard from './UserCard';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
 import { addFeed } from '../utils/feedSlice';
+import { useNavigate } from 'react-router-dom';
+import { addUser } from '../utils/userSlice';
+
 
 const EditProfile = ({user}) => {
 
@@ -14,16 +17,20 @@ const EditProfile = ({user}) => {
     
     // // const {firstName,lastName,age,gender,about } = user;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const[firstName , setFirstName] = useState(user.firstName);
     const[lastName , setLastName] = useState(user.lastName);
-    const[age , setAge] = useState(user.age);
-    const[gender , setGender] = useState(user.gender);
-    const[skills , setSkills] = useState(user.skills);
-    const[ photoURL, setPhotoURL] = useState(user.photoURL);
-    const[about , setAbout] = useState(user.about);
+    const[age , setAge] = useState(user.age|| "");
+    const[gender , setGender] = useState(user.gender || "");
+    const[skills , setSkills] = useState(user.skills || "");
+    const[photoURL, setPhotoURL] = useState(user.photoURL);
+    const[about , setAbout] = useState(user.about || "" );
     const[error , setError] = useState("");
+    // const dispatch = useDispatch();
 
     const handlSetProfile = async()=>{
+
+
         try{
             const res = await axios.patch(BASE_URL+"/profile/edit" , {
                 firstName,
@@ -36,7 +43,14 @@ const EditProfile = ({user}) => {
             },{
                 withCredentials:true
             })
-            // dispatch(addFeed(res));
+            // dispatch(add)
+            // console.log("res")
+            // console.log(res?.data?.data);
+
+            dispatch(addUser(res?.data?.data));
+            
+            navigate("/");
+
         }
         catch(err){
             setError(err.response.data)
@@ -46,9 +60,9 @@ const EditProfile = ({user}) => {
     // const{firstName} = user;
         // const[error , setError] = useState(null);
   return (
-    <div className='flex justify-center flex-col'>
-         <div className="flex justify-center items-center">
-                <div className="card card-dash w-1/3 bg-base-300 mt-20">
+    <div className='flex justify-evenly flex-row items-center mb-10'>
+         {/* <div className=""> */}
+                <div className="card card-dash w-auto bg-base-300 mt-20">
                     <div className="card-body flex items-center">
                         <h2 className="card-title mb-4">Edit Info</h2>
                         <div>
@@ -149,7 +163,7 @@ const EditProfile = ({user}) => {
                             >Set Profile</button>
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
 
         <UserCard user={{firstName , lastName , age , gender , skills , photoURL , about}}/>
     </div>

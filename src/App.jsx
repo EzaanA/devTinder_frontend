@@ -9,6 +9,7 @@ import Feed from "./components/Feed"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
 
+// theres a bug in the app which is in redux feedSlice so when we login from another account hamey pichley user ki feed hi dikh rahi hoti h cuz hamari slice abhi update nhi hui h uske liye hamey reload krna pdta h then it works... so resolve it
 
 function App() {
   return (

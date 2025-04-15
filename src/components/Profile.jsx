@@ -3,15 +3,18 @@ import EditProfile from "./EditProfile"
 
 
 const Profile = () => {
-      const user = useSelector((store)=>{
-        return store.user;
-      })
-      console.log(user)
+      const user = useSelector((store)=>
+         store.user
+      )
+      // console.log("user:")
+      // console.log(user)
+      if(!user){
+        return <h1>No user found! Please Login</h1>
+      }
   return (
-    user && (
     <>
-    <EditProfile user={user}/>
-    </>)
+      <EditProfile user = {user}/>
+    </>
   )
 }
 

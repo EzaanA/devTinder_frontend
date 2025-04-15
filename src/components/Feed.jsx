@@ -33,17 +33,22 @@ const Feed = () => {
       getFeed();
   },[]);
 
+  if(!feed){
+    return
+  }
+
+  if(feed.length <= 0){
+    return <div className='flex justify-center items-center mt-56'>⚠️ No new users found </div>
+  }
   // feedData();
   return (
-    feed && (
+    <>
     <div className='flex justify-center pt-9'>
-    {
-      feed.map((e)=>{
-        <UserCard user = {e}/>
-      })
-    }
-    </div>)
-  )
+          <UserCard user = {feed[0]}/>
+    </div>
+    </>
+    )
+
 }
 
 export default Feed;

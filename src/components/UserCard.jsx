@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux'
 import { removeFeed } from '../utils/feedSlice'
 
 const UserCard = ({user}) => {
-  console.log({user})
-  const{_id,firstName , lastName , age, gender, skills, photoURL, about} = user
+  // console.log("hellp"+ {user})
+  const{_id , firstName , lastName , age, gender, skills, photoURL, about} = user
 
   const dispatch = useDispatch();
 
@@ -21,11 +21,6 @@ const UserCard = ({user}) => {
       console.log(err);
     }
   }
-
-  if(!user){
-    return <div>No feed</div>
-  }
-
   return (
     <div>
       <div className="card bg-base-300 w-96 shadow-sm">

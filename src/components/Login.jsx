@@ -10,6 +10,9 @@ const Login  = () => {
 
     const[email , setEmail] = useState("aditya@gmail.com");
     const[password , setPassword] = useState("Aditya@25");
+    const[firstName , setFirstName] = useState("");
+    const[lastName , setLastName] = useState("");
+    const[isLogin , setIsLogin] = useState(true);
     const[error , setError] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -20,22 +23,31 @@ const Login  = () => {
                 email ,
                 password
             },
-            // console.log(res);
             {withCredentials : true}
         )
-        // console.log(res)
         // this will bring the user data from the backend & will store it in the store
-        // window.location.href = "/";
-        dispatch(addUser(res.data))
-        // setTimeout(()=>{
+            dispatch(addUser(res.data))
             return navigate("/")
-        // },10000);
         }
         catch(err){
             // navigate("/login");
             setError(err?.response?.data.error);
-            console.log(err?.response?.data);
+            // console.log(err?.response?.data);
         }
+    }
+
+    const handleSignUp=async()=>{
+       try
+        { 
+            const res = await axios.post(BASE_URL+"/signup" , {firstName , lastName , email , password} ,{
+            withCredentials : true
+        })
+        dispatch(addUser(res.data.data));
+        return navigate("/profile");
+    }
+    catch(err){
+        console.log(err);
+    }
     }
 
     return (
@@ -43,9 +55,38 @@ const Login  = () => {
             <div className="flex justify-center items-center">
                 <div className="card card-dash w-1/3 bg-base-300 mt-20">
                     <div className="card-body flex items-center">
-                        <h2 className="card-title mb-4">Login</h2>
+
+                    {isLogin?<h2 className="card-title mb-4">Login</h2>:<h2 className="card-title mb-4">SignUp</h2>}
+
+
+                    {!isLogin && 
+                    <>
                         <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
-                        {/* <div>{email}</div> */}
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                required
+                                onChange = {(e)=>{
+                                    setFirstName(e.target.value)
+                                }}
+                            />
+                        </label>
+
+                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                required
+                                onChange = {(e)=>{
+                                    setLastName(e.target.value)
+                                }}
+                            />
+                        </label>
+                        </>
+                        }
+
+                        
+                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
                             <input
                                 type="email"
                                 placeholder="Enter your email ID"
@@ -85,13 +126,25 @@ const Login  = () => {
                             <br />
                             At least one uppercase letter
                         </p>
+
+
+                       {isLogin?<p className="cursor-pointer mt-3" onClick={()=>{
+                            setIsLogin(false)
+                        }}>New User? Click here to Sign In</p> : 
+                        <p className="cursor-pointer mt-3"
+                        onClick={()=>{
+                            setIsLogin(true)
+                        }}
+                        >Existing User? Click here </p>
+                        }
+
                         <div className="card-actions justify-end">
                         {
                         error && <p className="text-red-500 mr-0">{error}!!</p>}
                         
-                            <button className="btn btn-primary mt-8"
-                            onClick={handlLogin}
-                            >Login</button>
+                        {<button className="btn btn-primary mt-8"
+                            onClick={isLogin ? handlLogin : handleSignUp}
+                            >{isLogin ? "Login" : "SignUp"}</button> }
                         </div>
                     </div>
                 </div>
