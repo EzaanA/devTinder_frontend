@@ -8,6 +8,7 @@ const UserCard = ({user}) => {
   // console.log("hellp"+ {user})
   const{_id , firstName , lastName , age, gender, skills, photoURL, about} = user
 
+  console.log("Skills: " + skills);
   const dispatch = useDispatch();
 
   const handleSendRequest = async(status , _id)=>{
@@ -33,6 +34,14 @@ const UserCard = ({user}) => {
     <h2 className="card-title">{firstName + " " + lastName}</h2>
     <p>{age + " " +gender}</p>
     <p>{about}</p>
+    {/* <div  key={_id} className='flex flex-row gap-3 overflow-scroll '> */}
+    <div key={_id} className='flex flex-row flex-wrap gap-3'>
+      {
+        skills.map((e)=>(
+          <div className="badge badge-success">{e}</div>
+        ))
+      }
+    </div>
     <div className="card-actions justify-end">
       <button className="btn btn-primary"
       onClick={()=>(handleSendRequest("ignored" , _id))}

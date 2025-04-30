@@ -104,9 +104,20 @@ const EditProfile = ({user}) => {
                         </label>
                         </div>
 
-                        <div>
+                        <div className='w-full'>
                         <p>Gender:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                        <select 
+                        className='input w-full'
+                                onChange={(e)=>{
+                                    setGender(e.target.value)
+                                }}
+                        >
+                            <option value="male" >male</option>
+                            <option value={"female"}>female</option>
+                            <option value={"others"}>others</option>
+                        </select>
+
+                        {/* <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
                             <input
                                 type="text"
                                 onChange={(e)=>{
@@ -114,7 +125,7 @@ const EditProfile = ({user}) => {
                                 }}
                                 value={gender}
                             />
-                        </label>
+                        </label> */}
                         </div>
 
                         <div>

@@ -13,6 +13,8 @@ const Feed = () => {
     return store.feed;
   });
 
+  console.log(feed);
+
   const getFeed = async()=>{
     if(feed){
       return;
@@ -44,7 +46,7 @@ const Feed = () => {
   return (
     <>
     <div className='flex justify-center pt-9'>
-          <UserCard user = {feed[0]}/>
+          <UserCard key={feed[0]._id} user = {feed[0]}/>
     </div>
     </>
     )
