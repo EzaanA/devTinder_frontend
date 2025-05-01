@@ -42,8 +42,12 @@ const Base = () => {
   return (
     <div>
         <Navbar/>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow">
         <Outlet/>
-        <Footer/>
+      </main>
+      <Footer />
+    </div>
     </div>
   )
 }

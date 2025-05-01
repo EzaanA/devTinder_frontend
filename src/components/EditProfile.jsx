@@ -145,6 +145,7 @@ const EditProfile = ({user}) => {
                         <p>About:</p>
                         <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
                             <input
+                            className='h-24'
                                 type="text"
                                 onChange={(e)=>{
                                     setAbout(e.target.value)

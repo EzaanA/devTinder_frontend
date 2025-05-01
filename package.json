@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@reduxjs/toolkit": "^2.6.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "autoprefixer": "^10.4.21",
     "axios": "^1.8.4",
+    "gsap": "^3.13.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

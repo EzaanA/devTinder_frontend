@@ -13,7 +13,7 @@ const Feed = () => {
     return store.feed;
   });
 
-  console.log(feed);
+  // console.log(feed);
 
   const getFeed = async()=>{
     if(feed){
