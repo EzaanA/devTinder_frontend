@@ -36,7 +36,7 @@ const UserCard = ({ user }) => {
   return (
     <div
       ref={cardRef}
-      className="transition-all ease-in-out duration-300  w-full flex justify-center"
+      className="transition-all ease-in-out duration-300  w-auto flex justify-center"
     >
       <div className="card bg-base-300 w-96 shadow-sm h-auto border">
         <figure>

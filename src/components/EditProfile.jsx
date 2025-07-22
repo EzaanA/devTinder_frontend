@@ -60,14 +60,14 @@ const EditProfile = ({user}) => {
     // const{firstName} = user;
         // const[error , setError] = useState(null);
   return (
-    <div className='flex justify-evenly flex-row items-center mb-10'>
+    <div className='flex justify-around items-center gap-'>
          {/* <div className=""> */}
-                <div className="card card-dash w-auto bg-base-300 mt-20">
+                <div className=" w-[30%] bg-base-300 mt-20 rounded-2xl">
                     <div className="card-body flex items-center">
                         <h2 className="card-title mb-4">Edit Info</h2>
-                        <div>
+                        <div className='w-full'>
                         <p>FirstName:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                        <label className="input validator w-full flex flex-col justify-center ">
                         {/* <div>{email}</div> */}
                             <input
                                 type="text"
@@ -78,9 +78,9 @@ const EditProfile = ({user}) => {
                             />
                         </label>
                         </div>
-                        <div>
+                        <div className='w-full'>
                         <p>LastName:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                        <label className="input validator w-full flex flex-col justify-center">
                             <input
                                 type="text"
                                 onChange={(e)=>{
@@ -91,9 +91,9 @@ const EditProfile = ({user}) => {
                         </label>
                         </div>
                         
-                        <div>
+                        <div className='w-full'>
                         <p>age:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                        <label className="input validator w-full flex flex-col justify-center">
                             <input
                                 type="number"
                                 onChange={(e)=>{
@@ -128,9 +128,9 @@ const EditProfile = ({user}) => {
                         </label> */}
                         </div>
 
-                        <div>
+                        <div className='w-full'>
                         <p>PhotoURL:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
+                        <label className="input validator w-full flex flex-col justify-center ">
                             <input
                                 type="text"
                                 onChange={(e)=>{
@@ -141,19 +141,19 @@ const EditProfile = ({user}) => {
                         </label>
                         </div>
 
-                        <div>
-                        <p>About:</p>
-                        <label className="input validator w-3/4 flex flex-col justify-center border-gray-500">
-                            <input
-                            className='h-24'
-                                type="text"
-                                onChange={(e)=>{
-                                    setAbout(e.target.value)
-                                }}
-                                value={about}
-                            />
-                        </label>
-                        </div>
+                        <div className='w-full'>
+  <p>About:</p>
+  <label className=" validator w-full flex flex-col justify-center">
+    <textarea
+      className="textarea textarea-bordered w-full h-40 resize-none"
+      onChange={(e) => {
+        setAbout(e.target.value);
+      }}
+      value={about}
+      placeholder="Write something about yourself..."
+    />
+  </label>
+</div>
 
                         {/* <div>
                         <p>Skills:</p>

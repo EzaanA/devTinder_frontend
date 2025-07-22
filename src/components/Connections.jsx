@@ -44,7 +44,7 @@ const Connections = () => {
         <div className='w-full'>
         <div className='flex flex-row justify-between  items-center'>
           <p className="font-semibold text-2xl">{e.firstName + " " + e.lastName}</p>
-          <Link to={"/chat/" + e._id + "/"+ e.firstName}>
+          <Link to={"/chat/" + e._id }>
             <IoChatbubbleEllipses
               className='text-2xl mr-4 cursor-pointer '
             />
