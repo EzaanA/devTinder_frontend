@@ -33,19 +33,20 @@ const UserCard = ({ user }) => {
     }
   };
 
+
   return (
     <div
       ref={cardRef}
-      className="transition-all ease-in-out duration-300  w-auto flex justify-center"
+      className="transition-all ease-in-out duration-300   border w-fit flex justify-center relative"
     >
-      <div className="card bg-base-300 w-96 shadow-sm h-auto border">
-        <figure>
-          <img src={photoURL} alt="Profile pic" />
+      <div className="card bg-base-300 w-96 shadow-sm  ">
+        <figure className="aspect-[2/4] w-96 overflow-hidden opacity-40 rounded-2xl">
+          <img src={photoURL} alt="Profile pic" className="h-full w-full "/>
         </figure>
-        <div className="card-body">
+        <div className="card-body bg-yellow-50 bg-transparent bg-opacity-0 rounded-2xl absolute bottom-0 w-full ">
           <h2 className="card-title">{firstName + ' ' + lastName}</h2>
           <p>{`${age} ${gender}`}</p>
-          <p>{about}</p>
+          <p className='max-h-40 overflow-hidden'>{about}</p>
           <div className="flex flex-wrap gap-3">
             {skills.map((e, i) => (
               <div key={i} className="badge badge-success">

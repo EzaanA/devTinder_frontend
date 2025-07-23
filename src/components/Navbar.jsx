@@ -4,11 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
+import { GiTechnoHeart } from "react-icons/gi";
+import { BsGearWideConnected } from "react-icons/bs";
+import { FaUserFriends } from "react-icons/fa";
+import { RiShutDownLine } from "react-icons/ri";
+
+
+
+
 
 const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
     const user = useSelector(
         (store) =>
@@ -33,10 +42,11 @@ const Navbar = () => {
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="flex-1">
                     <Link to="/" className="btn btn-ghost text-xl">
-                        devTinder
+                        👨🏻‍💻devTinder
                     </Link>
                 </div>
                 <div className="flex gap-2">
+                    {/* <button>Search</button> */}
                     {user && (
                         <div className="dropdown dropdown-end mx-5">
                             <div className="flex items-center">
@@ -56,7 +66,7 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow absolute opacity-55"
                             >
                                 <li>
                                     <Link
@@ -64,21 +74,34 @@ const Navbar = () => {
                                         className="justify-between"
                                     >
                                         Profile
-                                        <span className="badge">New</span>
+                                        <span className="badge"><BsGearWideConnected />
+                                        </span>
                                     </Link>
                                 </li>
                                     <li>
-                                <Link to={"/connections"}>
+                                <Link 
+                                className="justify-between"
+                                to={"/connections"}>
                                         Friends
+                                        <span className="badge"><GiTechnoHeart /> </span>
+
                                 </Link>
                                     </li>
                                     <li>
                                 <Link to={"/requests"}>
                                         Requests
+                                        <span className="badge"><FaUserFriends /> </span>
                                 </Link>
                                     </li>
                                 <li>
-                                    <a onClick={handleLogout}>Logout</a>
+                                    <Link                                 
+                                    className="justify-between"
+                                    onClick={handleLogout}>
+                                        Logout
+                                        <span className="badge">
+                                        <RiShutDownLine/>
+                                            </span>
+                                        </Link>
                                 </li>
                             </ul>
                         </div>

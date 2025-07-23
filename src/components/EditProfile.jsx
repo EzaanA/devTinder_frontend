@@ -27,6 +27,65 @@ const EditProfile = ({user}) => {
     const[about , setAbout] = useState(user.about || "" );
     const[error , setError] = useState("");
     // const dispatch = useDispatch();
+    // const [preview , setPreview ] = useState("");
+    // console.log(preview);
+
+
+    const uploadImageToCloudinary = async (base64Image) => {
+        const CLOUD_NAME = 'dawmm21zt'; // 🔁 Replace with your Cloudinary cloud name
+        const UPLOAD_PRESET = 'my_unsigned_preset';
+      
+        const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+      
+        const formData = new FormData();
+        formData.append('file', base64Image); // base64 string (e.g., 'data:image/png;base64,...')
+        formData.append('upload_preset', UPLOAD_PRESET);
+      
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            body: formData,
+          });
+      
+          const data = await res.json();
+      
+          if (data.secure_url) {
+            setPhotoURL(data.secure_url); // ✅ Set state here
+            return data.secure_url;
+          } else {
+            throw new Error("Upload failed");
+          }
+        } catch (error) {
+          console.error("❌ Cloudinary upload error:", error);
+          return null;
+        }
+      };
+      
+
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+      
+        reader.onloadend = async () => {
+          const base64Image = reader.result; // This will be: data:image/png;base64,...
+          const imageUrl = await uploadImageToCloudinary(base64Image);
+      
+          if (imageUrl) {
+            // Send the URL to your backend
+            await fetch('/api/save-image-url', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ imageUrl }),
+            });
+          }
+        };
+      
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+
 
     const handlSetProfile = async()=>{
 
@@ -60,7 +119,9 @@ const EditProfile = ({user}) => {
     // const{firstName} = user;
         // const[error , setError] = useState(null);
   return (
-    <div className='flex justify-around items-center gap-'>
+    <div className='flex justify-around items-center '>
+                                {/* <img src={preview} alt="Profile pic" /> */}
+
          {/* <div className=""> */}
                 <div className=" w-[30%] bg-base-300 mt-20 rounded-2xl">
                     <div className="card-body flex items-center">
@@ -129,15 +190,16 @@ const EditProfile = ({user}) => {
                         </div>
 
                         <div className='w-full'>
-                        <p>PhotoURL:</p>
+                        <p>Upload Profile Photo :</p>
                         <label className="input validator w-full flex flex-col justify-center ">
-                            <input
+                            {/* <input
                                 type="text"
                                 onChange={(e)=>{
                                     setPhotoURL(e.target.value)
                                 }}
                                 value={photoURL}
-                            />
+                            /> */}
+                            <input type="file" accept="image/*" onChange={handleFileChange} />
                         </label>
                         </div>
 

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card.dust-clone {
+    box-shadow: none !important;
+    border: none !important;
+    background: inherit !important;
+  }

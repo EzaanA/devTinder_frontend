@@ -4,6 +4,7 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFeed } from '../utils/feedSlice'
 import UserCard from './UserCard'
+import Search from './Search'
 
 
 const Feed = () => {
@@ -45,8 +46,15 @@ const Feed = () => {
   // feedData();
   return (
     <>
-    <div className='flex justify-center pt-9'>
-          <UserCard key={feed[0]._id} user = {feed[0]}/>
+    <div className='flex justify-around pt-9'>
+
+    {/* <div className="collapse collapse-arrow bg-base-100 border border-base-300"> */}
+        <Search/>
+        {/* </div> */}
+
+
+        <UserCard key={feed[0]._id} user = {feed[0]}/>
+        
     </div>
     </>
     )
